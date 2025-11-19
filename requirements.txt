@@ -1,0 +1,5 @@
+python-constraint
+jupyterlab
+matplotlib
+numpy
+pytest
