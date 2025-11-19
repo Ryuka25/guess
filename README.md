@@ -9,8 +9,8 @@ Voici la structure et contenu des dossiers:
 |- src/
 |   |- operations.py <-- Function qui simule les 4 opérations
 |   |- problem_constraints.py <-- Function qui ajoute les contraintes sur un problème donnée par rapport aux résultats et les opérations
-|
 |   |- utils.py <-- Function utilitaires qui sont généralement utilisé dans l'algorithme principale
+|
 |- tests/
 |   |- test_constraint.py <-- Test que les contrainte ajouté sont bien pris en compte dans le problème
 |   |- test_operations.py <-- Test que les opérations ne sont pas éronné
