@@ -1,15 +1,12 @@
 from random import randint
-from src.operations import addition, multiplication, division, zero
 from configs import (
     MAX_NUMBER,
     MIN_NUMBER,
     PEOPLES,
     HIDDEN_NUMBERS,
     MANUAL_HIDDEN_NUMBERS,
+    OPERATION_MAP,
 )
-
-
-OPERATION_MAP = {"ADD": addition, "MUL": multiplication, "DIV": division, "ZER": zero}
 
 
 class GuessTheNumberMaster:
@@ -69,7 +66,7 @@ class GuessTheNumberMaster:
 
                 print(f"{personne_1} {personne_2} {operation} == {result}")
 
-            except:
+            except Exception:
                 print("erreur (vérifier vos inputs)")
                 continue
 

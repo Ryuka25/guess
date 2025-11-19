@@ -1,4 +1,5 @@
 from random import randint
+from src.operations import addition, multiplication, division, zero
 
 MAX_NUMBER = 100
 MIN_NUMBER = 1
@@ -15,6 +16,8 @@ PEOPLES = [
     "F",
     "G",
 ]
+
+OPERATION_MAP = {"ADD": addition, "MUL": multiplication, "DIV": division, "ZER": zero}
 
 #################################################
 # MASTER CONFIGS
