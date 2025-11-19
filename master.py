@@ -1,9 +1,12 @@
-from constraint import Problem, AllDifferentConstraint
 from random import randint
-from operations import addition, multiplication, division, zero
-
-MAX_NUMBER = 100
-MIN_NUMBER = 1
+from src.operations import addition, multiplication, division, zero
+from configs import (
+    MAX_NUMBER,
+    MIN_NUMBER,
+    PEOPLES,
+    HIDDEN_NUMBERS,
+    MANUAL_HIDDEN_NUMBERS,
+)
 
 
 OPERATION_MAP = {"ADD": addition, "MUL": multiplication, "DIV": division, "ZER": zero}
@@ -11,49 +14,21 @@ OPERATION_MAP = {"ADD": addition, "MUL": multiplication, "DIV": division, "ZER":
 
 class GuessTheNumberMaster:
     def __init__(self):
-        ###############################
-        # Setting up the hidden numbers
-        ###############################
-        peoples = [
-            "K",
-            "L",
-            "P",
-            "A",
-            "B",
-            "C",
-            "D",
-            "E",
-            "F",
-            "G",
-        ]
-        self.hidden_numbers = {}
-        random_numbers = []
-        for people in peoples:
-            random_number = 0
-            while True:
-                random_number = randint(MIN_NUMBER, MAX_NUMBER)
-                if random_number in random_numbers:
-                    continue
-                else:
-                    random_numbers.append(random_number)
-                    break
-            self.hidden_numbers[people] = random_number
-
-        # self.hidden_numbers = {
-        #     "K": 43,
-        #     "L": 38,
-        #     "P": 81,
-        #     "O": 5,
-        #     "A": randint(MIN_NUMBER, MAX_NUMBER + 1),
-        #     "B": randint(MIN_NUMBER, MAX_NUMBER + 1),
-        #     "C": randint(MIN_NUMBER, MAX_NUMBER + 1),
-        #     "D": randint(MIN_NUMBER, MAX_NUMBER + 1),
-        #     "E": randint(MIN_NUMBER, MAX_NUMBER + 1),
-        #     "F": randint(MIN_NUMBER, MAX_NUMBER + 1),
-        #     "G": randint(MIN_NUMBER, MAX_NUMBER + 1),
-        # }
-
-        pass
+        if MANUAL_HIDDEN_NUMBERS:
+            self.hidden_numbers = HIDDEN_NUMBERS
+        else:
+            self.hidden_numbers = {}
+            random_numbers = []
+            for people in PEOPLES:
+                random_number = 0
+                while True:
+                    random_number = randint(MIN_NUMBER, MAX_NUMBER)
+                    if random_number in random_numbers:
+                        continue
+                    else:
+                        random_numbers.append(random_number)
+                        break
+                self.hidden_numbers[people] = random_number
 
     def start(self):
         print("hidden_numbers = ", self.hidden_numbers)
