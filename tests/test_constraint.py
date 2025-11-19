@@ -1,13 +1,20 @@
 import pytest
 from constraint import Problem
-from operations import addition, multiplication, division, zero
-from problem_constraints import (
-    add_constraint_for_addition,
-    add_constraint_for_division,
-    add_constraint_for_multiplication,
-    add_constraint_for_zero,
+from src.operations import (
+    addition,
+    #
+    # multiplication,
+    # division,
+    # zero
 )
-from utils import get_solutions_for_one_variable, Histories
+from src.problem_constraints import (
+    add_constraint_for_addition,
+    #
+    # add_constraint_for_division,
+    # add_constraint_for_multiplication,
+    # add_constraint_for_zero,
+)
+from src.utils import get_solutions_for_one_variable, Histories
 
 
 @pytest.mark.parametrize(

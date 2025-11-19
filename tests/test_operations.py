@@ -1,6 +1,6 @@
 import pytest
 from unittest.mock import patch
-from operations import division, multiplication, addition, zero
+from src.operations import division, multiplication, addition, zero
 
 
 @patch("operations.randint")

@@ -1,7 +1,5 @@
-# Realistic constraints
-
 from constraint import Problem
-from operations import multiplication, division, zero
+from src.operations import multiplication, division, zero
 
 
 def add_constraint_for_addition(

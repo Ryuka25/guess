@@ -1,21 +1,6 @@
+import copy
 from constraint import Problem
-from problem_constraints import (
-    add_constraint_for_addition,
-    add_constraint_for_division,
-    add_constraint_for_multiplication,
-    add_constraint_for_zero,
-)
-
-
-OPERATION_CONSTRAINT = {
-    "ADD": add_constraint_for_addition,
-    "MUL": add_constraint_for_multiplication,
-    "DIV": add_constraint_for_division,
-    "ZER": add_constraint_for_zero,
-}
-
-MAX_NUMBER = 100
-MIN_NUMBER = 1
+from configs import MIN_NUMBER, MAX_NUMBER, OPERATION_CONSTRAINT
 
 
 class Histories:
@@ -77,3 +62,61 @@ def apply_constraint(
 ):
     constraint = OPERATION_CONSTRAINT[operation]
     constraint(problem, result, var1, var2)
+
+
+def check_constraint_validity(
+    new_problem, peoples, var1, var2, operation, result, histories
+):
+    apply_constraint(new_problem, var1, var2, operation, result)
+
+    for people in get_other_variables(peoples):
+        candidates = get_solutions_for_one_variable(new_problem, people, histories)
+        if len(candidates) == 0:
+            yes_no = input(
+                f"No candidates found for {people} if using this cmd, continue with this ? y/N"
+            )
+            if yes_no == "y":
+                continue
+            else:
+                raise Exception(f"No candidates found for {people} if using this cmd")
+        if len(candidates) == 1:
+            print(f"One candidate left for {people} == {candidates}")
+
+
+def add_command(problem: Problem, cmd: str, histories, peoples):
+    # cmd sous la forme "VAR1 VAR2 OPERATION RESULT"
+    parsed_cmd = cmd.upper().split()
+
+    var1 = parsed_cmd[0]
+    var2 = parsed_cmd[1]
+    operation = parsed_cmd[2]
+    result = int(parsed_cmd[3])
+
+    new_variables = []
+    current_variables = list(problem._variables.keys())
+    if var1 not in current_variables:
+        new_variables.append(var1)
+    if var2 not in current_variables:
+        new_variables.append(var2)
+
+    new_problem = copy.deepcopy(problem)
+    new_problem.addVariables(new_variables, range(MIN_NUMBER, MAX_NUMBER + 1))
+    check_constraint_validity(
+        new_problem, peoples, var1, var2, operation, result, histories
+    )
+
+    problem.addVariables(new_variables, range(MIN_NUMBER, MAX_NUMBER + 1))
+    apply_constraint(problem, var1, var2, operation, result)
+
+    return var1, var2, operation, result
+
+
+def get_operation_already_used_in_list_of_ordered_operation(
+    list_of_ordered_operation, people
+):
+    already_used_operations = []
+    for ordered_operation in list_of_ordered_operation:
+        for operation in ordered_operation:
+            if operation["var"] == people:
+                already_used_operations.append(operation["operation"])
+    return already_used_operations

@@ -1,5 +1,13 @@
 from random import randint
 from src.operations import addition, multiplication, division, zero
+from src.problem_constraints import (
+    add_constraint_for_addition,
+    add_constraint_for_division,
+    add_constraint_for_multiplication,
+    add_constraint_for_zero,
+)
+
+DEBUG = False
 
 MAX_NUMBER = 100
 MIN_NUMBER = 1
@@ -18,6 +26,20 @@ PEOPLES = [
 ]
 
 OPERATION_MAP = {"ADD": addition, "MUL": multiplication, "DIV": division, "ZER": zero}
+OPERATION_CONSTRAINT = {
+    "ADD": add_constraint_for_addition,
+    "MUL": add_constraint_for_multiplication,
+    "DIV": add_constraint_for_division,
+    "ZER": add_constraint_for_zero,
+}
+
+#################################################
+# CLIENT CONFIGS
+#################################################
+
+# Set which of people are the one who whill use the algorithm
+# To find his number and others number
+ME = "K"
 
 #################################################
 # MASTER CONFIGS

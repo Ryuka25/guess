@@ -1,5 +1,5 @@
 from constraint import Problem
-from utils import get_solutions_for_one_variable, Histories
+from src.utils import get_solutions_for_one_variable, Histories
 
 
 def test_get_solutions_for_one_variable():
